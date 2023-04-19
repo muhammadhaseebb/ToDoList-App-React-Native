@@ -76,7 +76,13 @@ export default function App() {
           label="Enter an item"
           value={newTodo}
           onChangeText={text => setNewTodo(text)}
-          right={<TextInput.Icon icon={'archive-arrow-up'} />}
+          right={
+            <TextInput.Icon
+              icon={
+                press !== undefined ? 'archive-arrow-up' : 'archive-arrow-down'
+              }
+            />
+          }
         />
         <Button
           style={{
