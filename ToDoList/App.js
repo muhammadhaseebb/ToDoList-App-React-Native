@@ -11,6 +11,7 @@ import {TextInput, Button} from 'react-native-paper';
 import {
   ScrollView,
   StatusBar,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -52,24 +53,12 @@ export default function App() {
       <StatusBar backgroundColor={'black'} />
 
       {/* textfield and button */}
-      <View
-        style={{
-          backgroundColor: 'black',
-          alignItems: 'center',
-          height: 60,
-          justifyContent: 'center',
-        }}>
+      <View style={styles.navBar}>
         <Text style={{fontSize: 32, fontFamily: 'Billabong', paddingTop: 20}}>
           To Do List
         </Text>
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          margin: 20,
-        }}>
+      <View style={styles.mainView}>
         <TextInput
           style={{width: '60%'}}
           mode="outlined"
@@ -85,11 +74,7 @@ export default function App() {
           }
         />
         <Button
-          style={{
-            backgroundColor: 'black',
-            height: 40,
-            paddingHorizontal: 20,
-          }}
+          style={styles.btn}
           onPress={press !== undefined ? handleupdate : handleNewTodo}
           textColor="white">
           {press !== undefined ? 'Update' : 'Add Item'}
@@ -99,30 +84,9 @@ export default function App() {
       {/* Output tiles */}
       <ScrollView>
         {todos.map((todo, index) => (
-          <View
-            key={index}
-            style={{
-              borderWidth: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginHorizontal: 20,
-              marginBottom: 10,
-              borderRadius: 10,
-              paddingVertical: 10,
-            }}>
+          <View key={index} style={styles.output}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text
-                style={{
-                  color: 'white',
-                  marginHorizontal: 20,
-                  backgroundColor: 'black',
-                  width: 20,
-                  height: 20,
-                  textAlign: 'center',
-                }}>
-                {index + 1}
-              </Text>
+              <Text style={styles.txt}>{index + 1}</Text>
               <TouchableOpacity
                 key={index}
                 onPress={() => updatetask(index, todo)}>
@@ -147,3 +111,41 @@ export default function App() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  navBar: {
+    backgroundColor: 'black',
+    alignItems: 'center',
+    height: 60,
+    justifyContent: 'center',
+  },
+  mainView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    margin: 20,
+  },
+  btn: {
+    backgroundColor: 'black',
+    height: 40,
+    paddingHorizontal: 20,
+  },
+  output: {
+    borderWidth: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: 20,
+    marginBottom: 10,
+    borderRadius: 10,
+    paddingVertical: 10,
+  },
+  txt: {
+    color: 'white',
+    marginHorizontal: 20,
+    backgroundColor: 'black',
+    width: 20,
+    height: 20,
+    textAlign: 'center',
+  },
+});
